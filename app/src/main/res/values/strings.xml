@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NotificationTest</string>
+    <string name="channel_name">テストチャンネル</string>
+    <string name="channel_description">テスト通知</string>
+</resources>
