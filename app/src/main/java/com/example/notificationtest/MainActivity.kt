@@ -34,23 +34,16 @@ class MainActivity : AppCompatActivity() {
 
 
         val uploadWorkRequest: WorkRequest =
-            PeriodicWorkRequestBuilder<UploadWorker>(5,TimeUnit.SECONDS)
-                .setInitialDelay(5,TimeUnit.SECONDS)
-                .build()
+            PeriodicWorkRequest.Builder(UploadWorker::class.java,16,TimeUnit.MINUTES).build()
 
-//        val alarm = AlarmManager.AlarmClockInfo().apply {
-//            this.showIntent(pendingIntent)
-//            this.triggerTime()
-//        }
+        createNotificationChannel()
+        WorkManager
+            .getInstance(applicationContext)
+            .enqueue(uploadWorkRequest)
 
         val button: Button = findViewById(R.id.notificationBtn)
         button.setOnClickListener {
-            val test: EditText = findViewById(R.id.editTextDate2)
-            createNotificationChannel()
-            Toast.makeText(applicationContext, test.toString(), Toast.LENGTH_SHORT).show()
-            WorkManager
-                .getInstance(applicationContext)
-                .enqueue(uploadWorkRequest)
+//            val test: EditText = findViewById(R.id.editTextDate2)
         }
     }
     private fun createNotificationChannel() {

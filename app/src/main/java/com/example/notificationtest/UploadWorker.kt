@@ -1,28 +1,26 @@
 package com.example.notificationtest
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.widget.Toast
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
 class UploadWorker(appContext: Context, workerParams: WorkerParameters):
     Worker(appContext, workerParams){
 
-
+    private var cnt = 0
 
     override fun doWork(): Result {
 
         val textTitle = "テスト"
         val textContent = "テスト通知"
         val notificationId = 1
+
+        Log.d("test","通知")
 
         val intent = Intent(applicationContext, SubActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
